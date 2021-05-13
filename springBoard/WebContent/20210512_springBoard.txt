@@ -1,0 +1,201 @@
+2021-05-12
+---------------------------------------
+
+문서이름 : 20210510_springBoard.txt
+springBoard\WebContent\20210510_springBoard.txt
+
+파일 업로드 및 페이징 처리 : 10시간 
+
+Dynamic Web Project 빌드 프레임워크 기준
+1. 워크스페이스 
+	el_sb
+	el_sb_work
+2. 탐캣 플러그인 
+	
+3. 프로젝트명 
+	springBoard
+4. sts 플러그인
+5. lib 포팅
+	commons-logging-1.1.2.jar : 스프링 로그 찍어주는 라이브러리 
+	cos.jar : 파일업로드 라이브러리 
+
+	###########################
+	스프링 프레임웍에서 el ${} 에 에러가 발생되면
+	tomcat lib  에 있는 el-api.jar,jasper-el.jar 를 
+	스프링 프레임워크에 포팅한다.
+
+	el-api.jar : 표현언어 : Tomcat EL : tomcat 에 있는 라이브러리 
+	jasper-el.jar
+	spring-expression-3.2.9.RELEASE.jar : 스프링 표현언어 : Spring EL
+	###########################
+
+	jai_codec.jar : 섬네일 : 이미지 크기 조절하는  api 
+	jai_core.jar
+
+	jstl.jar : jstl 라이브러리 
+	standard.jar
+
+	log4j-1.2.17.jar : log4j api 
+
+	mybatis-3.2.4.jar : 마이바티스 라이브러리 
+	mybatis-spring-1.2.2.jar
+
+	ojdbc6.jar : Oralcle 11g 2 Release jdbc 드라이버
+
+	spring-beans-3.2.9.RELEASE.jar : Bean 라이프 사이클
+	
+	spring-context-3.2.9.RELEASE.jar : 컴포넌트 경로 
+	spring-context-support-3.2.9.RELEASE.jar
+	
+	spring-core-3.2.9.RELEASE.jar : IoC, DI
+	
+	spring-tx-3.2.9.RELEASE.jar : 데이터베이스 트랜잭션
+	
+	spring-webmvc-3.2.9.RELEASE.jar : Web MVC : Model View Controller
+
+환경설정 파일 세팅하기 
+######################################
+6. context.xml : 이클립스에 모든 컨텍스트에 적용되는 환경설정 파일 
+		이클립스 : 워크스페이스에 컨텍스트 가 여러개 있어도 무방하다. 
+		인텔리제이 : 워크스페이스에 컨텍스트 가 하나만 있어야 한다. 
+	Servers/Tomcat v8.5 Server at localhost-config/context.xml
+
+	server.xml : port="8088", URIEncoding="EUC-KR"(GET), Context path="/springBoard"
+	web.xml : session timeout = 30분, MIME type 설정 
+
+	context.xml 에서는 
+	Resource 엘리먼트에 데이터소스 정보를 설정해 놓으면
+	spring-servlet.xml 마이바티스 환경설정 파일에서 
+	java:comp/env jndi 환경설정 메타 데이터로 데이터소스 연결정보를 연결한다.
+	이후에는 스프링 마바이티스 프레임워크에서 디비 연결을 관장한다.
+
+7. web.xml
+	springBoard 컨텍스트의 환경설정 파일 이다. 
+
+8. spring-servlet.xml
+	스프링 웹 MVC 환경설정 파일이다. 
+	1) 스프링 웹 MVC 컨피규레이션
+	2) Component 스캔
+	3) View Resolving 
+
+
+9. serlvet-context.xml
+	마이바티스 환경설정 파일 
+	1) 데이터 소스 찾기 
+	2) mapper.xml 찾기 : 쿼리문 찾기
+	3) 트랜잭션 처리 
+	4) mapper, dao 인터페이스 찾기 
+
+
+개발환경 
+------------
+
+1. jdk
+	jdk 1.8 
+2. was
+	tomcat 8.5
+		Apache Tomcat Version 8.5.61
+		Servlet spec 3.1
+		Jsp spec 2.3
+		el spec 3.0
+		web socket 1.1
+3. ide
+	eclipse202006
+4. spring
+	library : 3.2.9, project : 4.3.16
+	sts : Spring Tool 3 : 3.9.14.RELEASE
+5. mybatis
+	libaray : mybatis-3.2.4
+	spring-mybatis : mybatis-spring-1.2.2
+6. log
+	log4j-1.2.17
+7. file upload
+	cos.jar 
+8. client browser : chrom 최신버전 
+9. 프로젝트 패키지명 : springBoard
+
+테이블 
+글번호 sbnum 
+제목 sbsubject
+작성자  sbname
+내용 sbcontent
+파일 sbfile
+비밀번호 sbpw
+삭제여부 sbdelyn	
+등록일 sbinsertdate
+삭제일 sbupdatedate
+
+CREATE TABLE SPRING_BOARD(
+	SBNUM VARCHAR2(20) PRIMARY KEY 
+   ,SBSUBJECT VARCHAR2(200) NOT NULL
+   ,SBNAME VARCHAR2(100) NOT NULL
+   ,SBCONTENT VARCHAR2(2000)
+   ,SBFILE VARCHAR2(300)
+   ,SBPW VARCHAR2(300)
+   ,SBDELYN VARCHAR2(1) NOT NULL
+   ,SBINSERTDATE DATE
+   ,SBUPDATEDATE DATE 
+);
+
+
+패키지
+a.b.c.com.board.controller
+	BoardController
+a.b.c.com.board.service
+	BoardService
+		public List<BoardVO> boardSelect(BoardVO bvo);
+		public List<BoardVO> boardSelectAll(BoardVO bvo);
+		public int boardInsert(BoardVO bvo);
+		public int boardUpdate(BoardVO bvo);
+		public int boardDelete(BoardVO bvo);
+	BoardServiceImpl
+a.b.c.com.board.dao
+	BoardDAO
+	BoardDAOImpl
+a.b.c.com.board.vo
+	BoardVO
+a.b.c.com.common
+a.b.c.com.common.service
+a.b.c.com.common.dao
+
+/mybatisconfig/mybatis-config.xml
+/mybatisquery/*.xml
+
+프론트 
+index.jsp
+/WEB-INF/views
+board.jsp
+boardInsert.jsp
+boardUpdate.jsp
+boardDelete.jsp
+boardSelect.jsp
+boardSelectAll.jsp
+
+-------------------------------------------
+
+CREATE TABLE SPRING_RBOARD(
+	RSBNUM VARCHAR2(20) PRIMARY KEY
+   ,SBNUM VARCHAR2(20) NOT NULL
+   ,RSBNAME VARCHAR2(100) NOT NULL
+   ,RSBCONTENT VARCHAR2(600)
+   ,RSBPW VARCHAR2(300) 
+   ,RSBDELYN VARCHAR2(1)
+   ,RSBINSERTDATE DATE
+);
+
+패키지
+a.b.c.com.rboard.controller
+	RBoardController
+a.b.c.com.rboard.service
+	RBoardService
+		public List<RBoardVO> rboardSelect(RBoardVO rbvo);
+		public List<RBoardVO> rboardSelectAll(RBoardVO rbvo);
+		public int rboardInsert(RBoardVO rbvo);
+		public int rboardUpdate(RBoardVO rbvo);
+		public int rboardDelete(RBoardVO rbvo);
+	RBoardServiceImpl
+a.b.c.com.board.dao
+	RBoardDAO
+	RBoardDAOImpl
+a.b.c.com.board.vo
+	RBoardVO
