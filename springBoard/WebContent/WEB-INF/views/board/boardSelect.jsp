@@ -14,7 +14,7 @@
 	.mem{ text-align: center;}
 </style>
 <!-- nhn 웹에디터  -->
-<script type="text/javascript" src="/springBoard/common/webedit/dist/js/service/HuskyEZCreator.js" charset="EUC-KR"></script>
+<script type="text/javascript" src="/springBoard/common/webedit/dist/js/service/HuskyEZCreator.js" charset="UTF-8"></script>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 
@@ -91,7 +91,7 @@
 <body>
 BOARD SELECT
 <hr>
-<% request.setCharacterEncoding("EUC-KR");%> 
+<% request.setCharacterEncoding("UTF-8");%> 
 <%
 	Object obj = request.getAttribute("listS");
 	List<BoardVO> list = (List)obj;

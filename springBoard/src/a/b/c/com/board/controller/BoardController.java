@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import a.b.c.com.board.service.BoardService;
 import a.b.c.com.board.vo.BoardVO;
 import a.b.c.com.common.ChabunUtil;
+import a.b.c.com.common.CommonUtils;
 import a.b.c.com.common.FileUploadUtil;
 import a.b.c.com.common.service.ChabunService;
 
@@ -79,7 +80,7 @@ public class BoardController {
 	
 	// 글 목록 조회
 	@RequestMapping(value="boardSelectAll", method=RequestMethod.GET)
-	public String boardSelectAll(BoardVO bvo, Model model) {
+	public String boardSelectAll(BoardVO bvo, Model model, HttpServletRequest req) {
 		logger.info("BoardController boardSelectAll 함수 진입 >>> :");	
 		
 		logger.info("BoardController boardSelectAll bvo.getKeyfilter() >>> : " + bvo.getKeyfilter());
@@ -87,11 +88,27 @@ public class BoardController {
 		logger.info("BoardController boardSelectAll bvo.getStartdate() >>> : " + bvo.getStartdate());
 		logger.info("BoardController boardSelectAll  bvo.getEnddate() >>> : " + bvo.getEnddate());
 		
+		// 페이징 사이즈 초기화
+		String pagesize = CommonUtils.B_PAGE_SIZE;		// 3
+		String groupsize = CommonUtils.B_GROUP_SIZE;	// 2
+		String curpage = CommonUtils.B_CUR_PAGE;		// 1
+		String totalcount =CommonUtils.B_TOTAL_COUNT;
+		
+		if(req.getParameter("curPage") != null) {
+			curpage = req.getParameter("curPage");
+		}
+		logger.info("BoardController boardSelectAll CURPAGE >>> :" + curpage);
+		
+		bvo.setPagesize(pagesize);
+		bvo.setGroupsize(groupsize);
+		bvo.setCurpage(curpage);
+		bvo.setTotalcount(totalcount);
 		
 		List<BoardVO> listAll = boardService.boardSelectAll(bvo);
 		logger.info("BoardController boardSelectAll listAll.size() >>> : " + listAll.size());
 		
-		if (listAll.size() > 0) { 
+		if (listAll.size() > 0) {
+			model.addAttribute("_bvo", bvo);
 			model.addAttribute("listAll", listAll);
 			return "board/boardSelectAll";
 		}

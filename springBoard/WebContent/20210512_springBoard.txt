@@ -60,7 +60,7 @@ Dynamic Web Project 빌드 프레임워크 기준
 		인텔리제이 : 워크스페이스에 컨텍스트 가 하나만 있어야 한다. 
 	Servers/Tomcat v8.5 Server at localhost-config/context.xml
 
-	server.xml : port="8088", URIEncoding="EUC-KR"(GET), Context path="/springBoard"
+	server.xml : port="8088", URIEncoding="UTF-8"(GET), Context path="/springBoard"
 	web.xml : session timeout = 30분, MIME type 설정 
 
 	context.xml 에서는 

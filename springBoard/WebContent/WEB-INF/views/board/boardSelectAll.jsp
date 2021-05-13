@@ -23,7 +23,7 @@
 <script src="/springBoard/common/datepiker/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 <script type="text/javascript">
 
-	$(document).ready(function(){			
+	$(document).ready(function(){
 		/*
 			CSS 선택자 우선순위 점수
 			직접기입  : styl='' : 1000 점 
@@ -108,7 +108,16 @@
 	List<BoardVO> list = (List)obj;
 	
 	int nCnt = list.size();
-	System.out.println("nCnt >>> : " + nCnt);	
+	System.out.println("nCnt >>> : " + nCnt);
+	
+	Object _obj = request.getAttribute("_bvo");
+	BoardVO _bvo = (BoardVO)_obj;
+	
+	// 페이징 관련 변수 초기화
+	String pageSize 	= "0"; // 페이지에 보이는 글 갯수
+	String groupSize 	= "0";
+	String curPage 		= "0"; // 페이지 번호
+	String totalCount 	= "0";
 %>
 <form name="boardList" id="boardList">
 <table border="1" align="center">
@@ -145,8 +154,12 @@
 </thead>
 <%
 for(int i=0; i<nCnt; i++){		
-	BoardVO bvo = list.get(i);	
-%>					
+	BoardVO bvo = list.get(i);
+	pageSize 	= _bvo.getPagesize();
+	groupSize 	= _bvo.getGroupsize();
+	curPage		= bvo.getCurpage();
+	totalCount 	= bvo.getTotalcount();
+%>
 <tbody>
 <tr>
 	<td align="center">
@@ -157,7 +170,7 @@ for(int i=0; i<nCnt; i++){
 	<td class="tt"><%= bvo.getSbname() %> </td>
 	<td class="tt"><%= bvo.getSbcontent() %> </td>
 	<td class="tt"><%= bvo.getSbupdatedate() %> </td>
-	<td class="tt"><img src="/springBoard/imgupload/sm_<%= bvo.getSbfile() %>"> </td>	
+	<td class="tt"><img src="/springBoard/imgupload/sm_<%= bvo.getSbfile() %>"></td>	
 </tr>	
 <%
 }//end of for
@@ -170,6 +183,20 @@ for(int i=0; i<nCnt; i++){
 	</td>
 </tr>
 <tr>
+	<td colspan="18">
+		<input type="button" value="<%=pageSize%>">
+		<input type="button" value="<%=groupSize%>">
+		<input type="button" value="<%=curPage%>">
+		<input type="button" value="<%=totalCount%>">
+		<jsp:include page="paging.jsp" flush="true">
+			<jsp:param name="url" value="boardSelectAll.j" />
+			<jsp:param name="pageSize" value="<%=pageSize%>" />
+			<jsp:param name="groupSize" value="<%=groupSize%>" />
+			<jsp:param name="curPage" value="<%=curPage%>" />
+			<jsp:param name="totalCount" value="<%=totalCount%>" />
+		</jsp:include>
+	</td>
+</tr>
 </tbody>			
 </table>
 </form>			

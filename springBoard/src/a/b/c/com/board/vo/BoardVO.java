@@ -18,6 +18,12 @@ public class BoardVO {
 	private String startdate;
 	private String enddate;
 	
+	// 페이징 관련 필드
+	private String pagesize;
+	private String groupsize;
+	private String curpage;
+	private String totalcount;
+	
 	public BoardVO() {
 		
 	}
@@ -38,6 +44,30 @@ public class BoardVO {
 		this.sbinsertdate = sbinsertdate;
 		this.sbupdatedate = sbupdatedate;
 	}
+	
+	// 페이징 포함
+	public BoardVO(String sbnum, String sbsubject, String sbname, String sbcontent, String sbfile, String sbpw,
+			String sbdelyn, String sbinsertdate, String sbupdatedate, String keyfilter, String keyword,
+			String startdate, String enddate, String pagesize, String groupsize, String curpage, String totalcount) {
+		this.sbnum = sbnum;
+		this.sbsubject = sbsubject;
+		this.sbname = sbname;
+		this.sbcontent = sbcontent;
+		this.sbfile = sbfile;
+		this.sbpw = sbpw;
+		this.sbdelyn = sbdelyn;
+		this.sbinsertdate = sbinsertdate;
+		this.sbupdatedate = sbupdatedate;
+		this.keyfilter = keyfilter;
+		this.keyword = keyword;
+		this.startdate = startdate;
+		this.enddate = enddate;
+		this.pagesize = pagesize;
+		this.groupsize = groupsize;
+		this.curpage = curpage;
+		this.totalcount = totalcount;
+	}
+
 	public String getSbnum() {
 		return sbnum;
 	}
@@ -125,4 +155,38 @@ public class BoardVO {
 	public void setEnddate(String enddate) {
 		this.enddate = enddate;
 	}
+
+	// 페이징 setter/getter
+	public String getPagesize() {
+		return pagesize;
+	}
+
+	public void setPagesize(String pagesize) {
+		this.pagesize = pagesize;
+	}
+
+	public String getGroupsize() {
+		return groupsize;
+	}
+
+	public void setGroupsize(String groupsize) {
+		this.groupsize = groupsize;
+	}
+
+	public String getCurpage() {
+		return curpage;
+	}
+
+	public void setCurpage(String curpage) {
+		this.curpage = curpage;
+	}
+
+	public String getTotalcount() {
+		return totalcount;
+	}
+
+	public void setTotalcount(String totalcount) {
+		this.totalcount = totalcount;
+	}
+	
 }

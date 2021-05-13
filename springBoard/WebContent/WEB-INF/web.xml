@@ -23,7 +23,7 @@
 		<url-pattern>*.j</url-pattern>
 	</servlet-mapping>
 	
-	<!-- 한글 인코딩 POST 방식에 적용 encoding EUC-KR : POST -->
+	<!-- 한글 인코딩 POST 방식에 적용 encoding UTF-8 : POST -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
