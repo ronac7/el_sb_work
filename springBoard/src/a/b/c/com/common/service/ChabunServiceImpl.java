@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import a.b.c.com.common.dao.ChabunDAO;
+import a.b.c.com.rboard.vo.RboardVO;
 import a.b.c.com.board.vo.BoardVO;
 
 @Service
@@ -24,6 +25,12 @@ public class ChabunServiceImpl implements ChabunService {
 	public BoardVO getBoardChabun() {
 		// TODO Auto-generated method stub
 		return chabunDAO.getBoardChabun();
+	}
+
+	@Override
+	public RboardVO getRboardChabun() {
+		// TODO Auto-generated method stub
+		return chabunDAO.getRboardChabun();
 	}
 
 }

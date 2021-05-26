@@ -8,4 +8,8 @@
 	SELECT NVL(MAX(SUBSTR(A.SBNUM, -4)), 0) + 1  SBNUM FROM SPRING_BOARD A
 </select>
 
+<select id="getRboardChabun" resultType="rboardVO">
+	SELECT NVL(MAX(SUBSTR(A.RSBNUM, -4)), 0) + 1  RSBNUM FROM SPRING_RBOARD A
+</select>
+
 </mapper>			

@@ -46,7 +46,7 @@
 		$(document).on("click", "#searchBtn", function(){
 			alert("searchBtn >>> : ");
 			$("#boardList").attr({ "method":"GET"
-				                  ,"action":"boardSelectAll.h"}).submit();
+				                  ,"action":"boardSelectAll.j"}).submit();
 		});
 		// datepicker : from ~ to 기간조회
 		$("#startdate").datepicker({		
@@ -184,10 +184,6 @@ for(int i=0; i<nCnt; i++){
 </tr>
 <tr>
 	<td colspan="18">
-		<input type="button" value="<%=pageSize%>">
-		<input type="button" value="<%=groupSize%>">
-		<input type="button" value="<%=curPage%>">
-		<input type="button" value="<%=totalCount%>">
 		<jsp:include page="paging.jsp" flush="true">
 			<jsp:param name="url" value="boardSelectAll.j" />
 			<jsp:param name="pageSize" value="<%=pageSize%>" />
